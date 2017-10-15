@@ -1,0 +1,31 @@
+#5
+Show the name and the population of each country in Europe. Show the population as a percentage of the population of Germany.
+Decimal places
+You can use the function ROUND to remove the decimal places.
+Percent symbol %
+You can use the function CONCAT to add the percentage symbol.
+
+SELECT name, CONCAT(ROUND(population*100/(SELECT population FROM world WHERE name = 'Germany'), 0), '%')
+FROM world
+WHERE continent = 'Europe'
+#
+We can use the word ALL to allow >= or > or < or <=to act over a list. 
+For example, you can find the largest country in the world, by population with this query:
+
+SELECT name
+  FROM world
+ WHERE population >= ALL(SELECT population
+                           FROM world
+                          WHERE population>0)
+You need the condition population>0 in the sub-query as some countries have null for population.                       
+#7
+Find the largest country (by area) in each continent, show the continent, the name and the area:
+
+select continent, name, area  
+from world b
+where area>=all (select area 
+                 from world a 
+                 where area>0 and a.continent=b.continent)
+The above example is known as a correlated or synchronized sub-query.
+
+
