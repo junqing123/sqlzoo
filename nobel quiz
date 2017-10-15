@@ -1,0 +1,11 @@
+# sqlzoo
+
+Select the code which shows the years when a Medicine award was given but no Peace or Literature award was
+
+SELECT DISTINCT yr
+  FROM nobel
+ WHERE subject='Medicine' 
+   AND yr NOT IN(SELECT yr FROM nobel 
+                  WHERE subject='Literature')
+   AND yr NOT IN (SELECT yr FROM nobel
+                   WHERE subject='Peace')
