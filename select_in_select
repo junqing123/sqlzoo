@@ -27,5 +27,13 @@ where area>=all (select area
                  from world a 
                  where area>0 and a.continent=b.continent)
 The above example is known as a correlated or synchronized sub-query.
+#8 
+List each continent and the name of the country that comes first alphabetically.
 
-
+select continent, name
+from world b 
+where name <= all(select name 
+                  from world a 
+                  where a.continent=b.continent)
+                  
+                  
