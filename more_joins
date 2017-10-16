@@ -1,0 +1,19 @@
+#10
+List the films together with the leading star for all 1962 films.
+select title, name 
+from (movie join casting on movie.id=casting.movieid) join actor on casting.actorid=actor.id
+where yr=1962 and ord=1
+
+#12
+List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+
+select title, name 
+from movie join casting on (movie.id=movieid and ord=1) 
+           join actor on actor.id=actorid
+where movie.id in 
+    (select movieid 
+     from casting 
+      where actorid in (select id 
+                        from actor 
+                        where name='julie andrews'))  
+                        
